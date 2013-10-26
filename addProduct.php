@@ -1,18 +1,17 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 include 'session.php';
-include 'includes/connectionPDO.php';
+include './includes/connectionPDO.php';
+include './includes/ConnectDB.inc';
+$sqlpv = mysql_query("SELECT * FROM running_pv;");
+$row = mysql_fetch_assoc($sqlpv);
+$pvinvalue= $row['value_in_pv'];
+$pvintaka= $row['value_in_tk'];
 
 $sql = "INSERT INTO product_temp(store_type ,store_id ,pro_code ,pro_name ,buying_price ,selling_price , profit ,xtra_profit, pv, qty, product_chart_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$sql2 = "SELECT * FROM `running_pv";
-$pvrow = $conn ->prepare($sql2);
-$pvrow->execute();
 
-$row = $pvrow->fetch(PDO::FETCH_ASSOC);
-$pvintaka = $row['value_in_tk'];
-$pvinvalue = $row['value_in_pv'];
-  $unitpv = $pvinvalue / $pvintaka;
+ $unitpv = $pvinvalue / $pvintaka;
     $G_s_type = $_SESSION['catagory'];
     $G_s_id= $_SESSION['offid'];
     
