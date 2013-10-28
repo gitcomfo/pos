@@ -12,7 +12,7 @@ function get_catagory()
 	echo  "<option value=".$catrow['pro_cat_code'].">".$catrow['pro_catagory']."</option>";
     }
 }
-$storeName= $_SESSION['offname'];
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
@@ -23,6 +23,10 @@ $storeName= $_SESSION['offname'];
 <script language="JavaScript" type="text/javascript" src="productsearch.js"></script>
 <link rel="stylesheet" href="css/css.css" type="text/css" media="screen" />
  <script src="scripts/tinybox.js" type="text/javascript"></script>
+  <script type="text/javascript">
+ function productUpdate(id)
+	{ TINY.box.show({iframe:'updateProduct.php?proid='+id,width:800,height:400,opacity:30,topsplit:3,animate:true,close:true,maskid:'bluemask',maskopacity:50,boxid:'success'}); }
+ </script>
 <script type="text/javascript">
 function ShowTime()
 {
@@ -240,8 +244,9 @@ function showBrandProducts(brandcode,procatid) // show products from brand
         <td width="23%"><div align="center"><strong>প্রোডাক্ট কোড</strong></div></td>
         <td width="30%"><div align="center"><strong>প্রোডাক্ট-এর নাম</strong></div></td>
         <td width="11%"><div align="center"><strong>পর্যাপ্ত পরিমাণ</strong></div></td>
-        <td width="16%"><div align="center"><strong>খুচরা মূল্য</strong></div></td>
-        <td width="12%"><div align="center"><strong>পি.ভি.</strong></div></td>
+        <td width="12%"><div align="center"><strong>খুচরা মূল্য</strong></div></td>
+        <td width="10%"><div align="center"><strong>পি.ভি.</strong></div></td>
+        <td width="6%"><div align="center"><strong>করনীয়</strong></div></td>
       </tr>
     <?php
 if (isset($_GET['code']))
@@ -254,6 +259,7 @@ if (isset($_GET['code']))
                         $db_qty=english2bangla($row["ins_how_many"]);
                         $db_procode=$row["ins_product_code"];
                         $db_proPV=english2bangla($row["ins_pv"]);
+                        $inventoryID= $row['idinventory'];
                         
       echo '<tr>';
       echo '<td><div align="center">১</div></td>';
@@ -262,6 +268,7 @@ if (isset($_GET['code']))
         echo '<td><div align="center">'.$db_qty.'</div></td>';
         echo '<td><div align="center">'.$db_price.'</div></td>';
         echo '<td><div align="center">'.$db_proPV.'</div></td>';
+        echo "<td><a onclick='productUpdate($inventoryID)' style='cursor:pointer;color:blue;'><u>আপডেট করুন</u></a></td>";
         echo '</tr>';
         }
 ?>

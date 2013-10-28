@@ -51,8 +51,9 @@ elseif ($_GET['id']== 'all')
         <td width='23%'><div align='center'><strong>প্রোডাক্ট কোড</strong></div></td>
         <td width='30%'><div align='center'><strong>প্রোডাক্ট-এর নাম</strong></div></td>
         <td width='11%'><div align='center'><strong>পর্যাপ্ত পরিমাণ</strong></div></td>
-        <td width='16%'><div align='center'><strong>খুচরা মূল্য</strong></div></td>
-        <td width='12%'><div align='center'><strong>পি.ভি.</strong></div></td>
+        <td width='12%'><div align='center'><strong>খুচরা মূল্য</strong></div></td>
+        <td width='10%'><div align='center'><strong>পি.ভি.</strong></div></td>
+        <td width='6%'><div align='center'><strong>করনীয়</strong></div></td>
       </tr>";
         if (isset($_GET['chartID']))
                 {	
@@ -76,6 +77,7 @@ elseif ($_GET['id']== 'all')
                                 $db_qty=english2bangla($row["ins_how_many"]);
                                 $db_procode=$row["ins_product_code"];
                                 $db_proPV=english2bangla($row["ins_pv"]);
+                                $inventoryID= $row['idinventory'];
 
               echo '<tr>';
               echo '<td><div align="center">'.english2bangla($SL).'</div></td>';
@@ -84,6 +86,7 @@ elseif ($_GET['id']== 'all')
                 echo '<td><div align="center">'.$db_qty.'</div></td>';
                 echo '<td><div align="center">'.$db_price.'</div></td>';
                 echo '<td><div align="center">'.$db_proPV.'</div></td>';
+                echo "<td><a onclick='productUpdate($inventoryID)' style='cursor:pointer;color:blue;'><u>আপডেট করুন</u></a></td>";
                 echo '</tr>';
                 $SL++;
                                }
@@ -100,8 +103,9 @@ elseif ($_GET['id']== 'type')
         <td width='23%'><div align='center'><strong>প্রোডাক্ট কোড</strong></div></td>
         <td width='30%'><div align='center'><strong>প্রোডাক্ট-এর নাম</strong></div></td>
         <td width='11%'><div align='center'><strong>পর্যাপ্ত পরিমাণ</strong></div></td>
-        <td width='16%'><div align='center'><strong>খুচরা মূল্য</strong></div></td>
-        <td width='12%'><div align='center'><strong>পি.ভি.</strong></div></td>
+        <td width='12%'><div align='center'><strong>খুচরা মূল্য</strong></div></td>
+        <td width='10%'><div align='center'><strong>পি.ভি.</strong></div></td>
+        <td width='6%'><div align='center'><strong>করনীয়</strong></div></td>
       </tr>";
         if (isset($_GET['proCatID']))
                 {
@@ -111,13 +115,15 @@ elseif ($_GET['id']== 'type')
                                 ANY( SELECT idproductchart FROM product_chart WHERE product_catagory_idproduct_catagory =$G_productCatID);");
                                 while($row = mysql_fetch_assoc($result))
                                 {
-                                     echo '<tr>';
+                                    $inventoryID= $row['idinventory']; 
+                                    echo '<tr>';
                                       echo '<td><div align="center">'.english2bangla($SL).'</div></td>';
                                       echo '<td><div align="left">'.$row["ins_product_code"].'</div></td>';
                                         echo '<td><div align="left">&nbsp;&nbsp;&nbsp;'.$row["ins_productname"].'</div></td>';
                                         echo '<td><div align="center">'.english2bangla($row["ins_how_many"]).'</div></td>';
                                         echo '<td><div align="center">'.english2bangla($row["ins_sellingprice"]).'</div></td>';
                                         echo '<td><div align="center">'.english2bangla($row["ins_pv"]).'</div></td>';
+                                        echo "<td><a onclick='productUpdate($inventoryID)' style='cursor:pointer;color:blue;'><u>আপডেট করুন</u></a></td>";
                                         echo '</tr>';
                                         $SL++;
                                 }
@@ -134,8 +140,9 @@ elseif ($_GET['id']== 'brnd')
         <td width='23%'><div align='center'><strong>প্রোডাক্ট কোড</strong></div></td>
         <td width='30%'><div align='center'><strong>প্রোডাক্ট-এর নাম</strong></div></td>
         <td width='11%'><div align='center'><strong>পর্যাপ্ত পরিমাণ</strong></div></td>
-        <td width='16%'><div align='center'><strong>খুচরা মূল্য</strong></div></td>
-        <td width='12%'><div align='center'><strong>পি.ভি.</strong></div></td>
+        <td width='12%'><div align='center'><strong>খুচরা মূল্য</strong></div></td>
+        <td width='10%'><div align='center'><strong>পি.ভি.</strong></div></td>
+        <td width='6%'><div align='center'><strong>করনীয়</strong></div></td>
       </tr>";
         if (isset($_GET['brandCode']))
                 {
@@ -154,13 +161,15 @@ elseif ($_GET['id']== 'brnd')
                             }
                                 while($row = mysql_fetch_assoc($result))
                                 {
-                                     echo '<tr>';
+                                    $inventoryID= $row['idinventory']; 
+                                    echo '<tr>';
                                       echo '<td><div align="center">'.english2bangla($SL).'</div></td>';
                                       echo '<td><div align="left">'.$row["ins_product_code"].'</div></td>';
                                         echo '<td><div align="left">&nbsp;&nbsp;&nbsp;'.$row["ins_productname"].'</div></td>';
                                         echo '<td><div align="center">'.english2bangla($row["ins_how_many"]).'</div></td>';
                                         echo '<td><div align="center">'.english2bangla($row["ins_sellingprice"]).'</div></td>';
                                         echo '<td><div align="center">'.english2bangla($row["ins_pv"]).'</div></td>';
+                                        echo "<td><a onclick='productUpdate($inventoryID)' style='cursor:pointer;color:blue;'><u>আপডেট করুন</u></a></td>";
                                         echo '</tr>';
                                         $SL++;
                                 }
