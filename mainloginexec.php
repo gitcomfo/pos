@@ -27,8 +27,8 @@ if( count($row) > 1)
            $stmt2= $conn->prepare($sql2);
            $stmt2->execute(array($db_cfsID));
            $row2 = $stmt2->fetch();
-           print_r($row2);
-           echo count($row2);
+          // print_r($row2);
+           //echo count($row2);
        if(count($row2)>1)
        {
          if($row2['employee_type'] == 'employee')
