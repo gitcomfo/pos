@@ -7,7 +7,7 @@ $sumeryid = $_GET['ssumid'];
 $check=1;
 while($check==1)
 {
-$str_pin= "Sales";
+$str_pin= "sales";
 for($i=0;$i<3;$i++)
     {
         $str_random_no=(string)mt_rand (0 ,9999 );
@@ -23,8 +23,9 @@ if($row['pin_no']!= $str_pin)
     $pinrow = mysql_fetch_assoc($sql_pin);
 	if($pinrow['idpin'] == "")
         {
-             $inssql= "INSERT INTO pin_makingused (`pin_no` ,`pin_state`, pin_making_date, pin_madeby_cfsuserid, sales_summery_idsalessummery) 
-                                    VALUES ('$str_pin', 'open', CURDATE(), $cfsid, $sumeryid);";
+            $g_totalpv = $_GET['pv']; 
+            $inssql= "INSERT INTO pin_makingused (`pin_no` ,`pin_state`, pin_totalpv, pin_making_date, pin_madeby_cfsuserid, sales_summery_idsalessummery) 
+                                    VALUES ('$str_pin', 'open', $g_totalpv, CURDATE(), $cfsid, $sumeryid);";
 	$insreslt = mysql_query($inssql) or exit ("sorry have problem");
 	$check=2;
         }
