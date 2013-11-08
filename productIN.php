@@ -24,7 +24,7 @@ if(isset($_POST['entry']))
     $all = $selectstmt->fetchAll();
     foreach($all as $row)
     {
-        $db_storetype=$row['store_type'];
+       echo  $db_storetype=$row['store_type'];
         $db_proCode=$row['pro_code'];
         $db_proname=$row['pro_name'];
         $db_buy=$row['buying_price'];
@@ -37,8 +37,6 @@ if(isset($_POST['entry']))
         $intype = 'in';
         $timestamp=time(); //current timestamp
         $date=date("Y/m/d", $timestamp);
-        $scatagory='s_store';
-        $db_storid=$row['store_id'];
        $yes = $stmt->execute(array($scatagory, $storeID, $date, $intype, $db_qty, $db_pv,  $db_xtraprofit, $db_profit, $db_buy, $db_sell, $cfsID, $db_chartid));
        if($yes == 1)
        {
