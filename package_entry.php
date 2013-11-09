@@ -279,12 +279,14 @@ if($_GET['step']==1) {
                                                             array_push($arr_pro_chartid, $row2['product_chartid']);
                                                             array_push($arr_pro_qty, $row2['product_quantity']);
                                                         }
+                                                        $str_pro_chartid = implode(',', $arr_pro_chartid);
+                                                        $str_pro_qty = implode(',', $arr_pro_qty);
                                                     }
                                          ?>
                                          <b>প্যাকেজের নাম : </b><input type="text" id="pckgName" name="pckgName" readonly value="<?php echo $db_pckgname;?>" style="width: 300px;"/><input type="hidden" name="pckgID"  value="<?php echo $pckgid;?>"/></br>
                                          <b>প্যাকেজ কোড &nbsp;: </b> <input type="text" id="pckgCode" name="pckgCode" readonly value="<?php echo $db_pckgcode;?>" style="width: 300px;"/></br>
-                                         <input type='hidden' name='pckgproid' value='<?php echo serialize($arr_pro_chartid); ?>' />
-                                         <input type='hidden' name='pckgqty' value='<?php echo serialize($arr_pro_qty); ?>' />
+                                         <input type='hidden' name='pckgproid' value='<?php echo $str_pro_chartid; ?>' />
+                                         <input type='hidden' name='pckgqty' value='<?php echo $str_pro_qty; ?>' />
                                          <table border="">
                                              <thead style="background-color: #ffcccc">
                                                  <th width="33%">পণ্যের কোড</th>

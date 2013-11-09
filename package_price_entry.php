@@ -25,8 +25,10 @@ if(isset($_POST['ok']))
     $P_pckgName = $_POST['pckgName'];
     $P_pckgCode = $_POST['pckgCode'];
     $P_pckgID = $_POST['pckgID'];
-    $arr_chart = unserialize($_POST['pckgproid']);
-    $arr_qty = unserialize($_POST['pckgqty']);
+    $str_chart = $_POST['pckgproid'];
+    $str_qty = $_POST['pckgqty'];
+    $arr_chart = explode(',', $str_chart);
+    $arr_qty = explode(',', $str_qty);
   
 }
 if(isset($_POST['entry']))
@@ -176,7 +178,7 @@ function checkIt(evt) // float value-er jonno***********************
                                                             {
                                                                 $prochartid = $arr_chart[$i];
                                                                 $proqty = $arr_qty[$i];
-                                                                $sql = "SELECT * FROM inventory WHERE ins_productid= ? AND ins_ons_type=? AND ins_ons_id =?";
+                                                                $sql = "SELECT * FROM inventory WHERE ins_productid= ? AND ins_ons_type=? AND ins_ons_id =? AND ins_product_type = 'general'";
                                                                 $selectstmt = $conn ->prepare($sql);
                                                                 $selectstmt->execute(array($prochartid,$scatagory,$storeID));
                                                                 $all = $selectstmt->fetchAll();
