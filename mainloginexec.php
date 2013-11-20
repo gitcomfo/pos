@@ -17,7 +17,8 @@ $errormsg = "";
 //Sanitize the POST values
 // Generate Guid 
 	$login = clean($_POST['username']);
-	$password = clean($_POST['password']);
+	$pass = clean($_POST['password']);
+                    $password = md5($pass);
 $stmt->execute(array($login,$password));
 $row = $stmt->fetch();
 if( count($row) > 1) 
